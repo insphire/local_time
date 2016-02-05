@@ -219,7 +219,10 @@ document.addEventListener "DOMContentLoaded", ->
     format   = element.getAttribute "data-format"
     local    = element.getAttribute "data-local"
 
-    time = new Date Date.parse datetime
+    time_zone = document.body.getAttribute "data-time-zone"
+    time_in_zone = moment.tz(datetime, time_zone).format('YYYY/MM/DD HH:mm')
+
+    time = new Date Date.parse time_in_zone
     return if isNaN time
 
     unless element.hasAttribute("title")
